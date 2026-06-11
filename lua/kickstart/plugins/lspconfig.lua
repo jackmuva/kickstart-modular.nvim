@@ -136,6 +136,12 @@ return {
         cssls = {},
         stylua = {}, -- Used to format Lua code
 
+        -- Swift: sourcekit-lsp ships with Xcode/the Swift toolchain, not Mason.
+        -- Configured/enabled below but excluded from Mason's ensure_installed.
+        sourcekit = {
+          cmd = { 'sourcekit-lsp' }, -- or { 'xcrun', 'sourcekit-lsp' } if not on PATH
+        },
+
         -- Special Lua Config, as recommended by neovim help docs
         lua_ls = {
           on_init = function(client)
@@ -179,6 +185,10 @@ return {
       --
       -- You can press `g?` for help in this menu.
       local ensure_installed = vim.tbl_keys(servers or {})
+      -- sourcekit-lsp is provided by Xcode/the Swift toolchain, not Mason.
+      ensure_installed = vim.tbl_filter(function(name)
+        return name ~= 'sourcekit'
+      end, ensure_installed)
       vim.list_extend(ensure_installed, {
         -- You can add other tools here that you want Mason to install
       })
