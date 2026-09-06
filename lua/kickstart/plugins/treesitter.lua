@@ -4,9 +4,11 @@ return {
     branch = 'main',
     build = ':TSUpdate',
     config = function()
+      -- MDX uses the markdown parser with JS/TSX injections (see after/queries/markdown/injections.scm)
+      vim.treesitter.language.register('markdown', 'mdx')
 
       -- ensure basic parser are installed
-      local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
+      local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'tsx', 'typescript', 'vim', 'vimdoc' }
       require('nvim-treesitter').install(parsers)
 
       ---@param buf integer
