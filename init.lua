@@ -93,6 +93,11 @@ vim.g.maplocalleader = ' '
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
 
+-- [[ Custom filetypes ]]
+-- Neovim only auto-loads `filetype.lua` at the config root; require custom mappings here
+-- so they are registered before filetype detection runs during startup.
+require 'custom.filetype'
+
 -- [[ Setting options ]]
 require 'options'
 
